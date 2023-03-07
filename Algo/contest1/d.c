@@ -1,99 +1,103 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
-#define MAX_QUEUE_SIZE 200001
+#define MAX_QUEUE_SIZE 200005
 
-long long int queue[MAX_QUEUE_SIZE]; // internal queue
-long long int front_idx = 0; // index of the first element in the queue
-long long int back_idx = 0; // index of the next free slot in the queue
-long long int min_value = 1e9; // the smallest value seen so far
+int queue[MAX_QUEUE_SIZE];
+int front = 0;
+int rear = -1;
+int size = 0;
+int min = INT_MAX;
 
-void enqueue(long long int x) {
-    queue[back_idx++] = x;
-    printf("ok\n");
-    if (x < min_value) {
-        min_value = x;
+void enqueue(int n) {
+    rear++;
+    queue[rear] = n;
+    size++;
+    if (n < min) {
+        min = n;
     }
+    printf("ok\n");
 }
 
 void dequeue() {
-    if (front_idx == back_idx) {
+    if (size == 0) {
         printf("error\n");
-    } else {
-        printf("%lld\n", queue[front_idx++]);
-        if (front_idx == back_idx) { // if the queue becomes empty
-            front_idx = 0;
-            back_idx = 0;
-            min_value = 1e9;
-        } else if (queue[front_idx] == min_value) { // if the smallest element is dequeued
-            min_value = queue[front_idx+1];
-            for (long long int i = front_idx+2; i < back_idx; i++) {
-                if (queue[i] < min_value) {
-                    min_value = queue[i];
-                }
+        return;
+    }
+    printf("%d\n", queue[rear]);
+    front--;
+    size--;
+    if (size == 0) {
+        min = INT_MAX;
+    } else if (queue[rear] == min) {
+        min = queue[rear - 1];
+        for (int i = rear - 1; i >= front; i--) {
+            if (queue[i] < min) {
+                min = queue[i];
             }
         }
     }
 }
 
-void front() {
-    if (front_idx == back_idx) {
+void front_element() {
+    if (size == 0) {
         printf("error\n");
-    } else {
-        printf("%lld\n", queue[front_idx]);
+        return;
     }
+    printf("%d\n", queue[front]);
 }
 
-void size() {
-    printf("%lld\n", back_idx - front_idx);
+void queue_size() {
+    printf("%d\n", size);
 }
 
-void clear() {
-    front_idx = 0;
-    back_idx = 0;
-    min_value = 1e9;
+void clear_queue() {
+    front = 0;
+    rear = -1;
+    size = 0;
+    min = INT_MAX;
     printf("ok\n");
 }
 
-void find_min() {
-    if (front_idx == back_idx) {
+void min_element() {
+    if (size == 0) {
         printf("error\n");
-    } else {
-        printf("%lld\n", min_value);
+        return;
     }
+    printf("%d\n", min);
 }
 
 int main() {
-    long long int m;
-    long long int input_amo = scanf("%lld", &m);
-    if (input_amo != 1) {
-        printf("error");
-        return 0;
+    int m;
+    char op[10];
+    int n;
+    if (scanf("%d", &m) != 1) {
+        printf("Error");
+        return -1;
     }
-    for (long long int i = 0; i < m; i++) {
-        char* cmd = calloc(21, sizeof(char));
-        if (scanf("%s", cmd) != 1) {
-            printf("error");
-            return 0;
+    for (int i = 0; i < m; i++) {
+        if (scanf("%s", op) != 1) {
+            printf("Error");
+            return -1;
         }
-        if (strncmp(cmd, "enqueue", 7) == 0) {
-            long long int x = 0;
-            if (scanf("%lld", &x) != 1) {
-                printf("error");
-                return 0;
+        if (strcmp(op, "enqueue") == 0) {
+            if (scanf("%d", &n) != 1) {
+                printf("Error");
+                return -1;
             }
-            enqueue(x);
-        } else if (strncmp(cmd, "dequeue", 7) == 0) {
+            enqueue(n);
+        } else if (strcmp(op, "dequeue") == 0) {
             dequeue();
-        } else if (strncmp(cmd, "front", 5) == 0) {
-            front();
-        } else if (strncmp(cmd, "size", 4) == 0) {
-            size();
-        } else if (strncmp(cmd, "clear", 5) == 0) {
-            clear();
-        } else if (strncmp(cmd, "min", 3) == 0) {
-            find_min();
+        } else if (strcmp(op, "front") == 0) {
+            front_element();
+        } else if (strcmp(op, "size") == 0) {
+            queue_size();
+        } else if (strcmp(op, "clear") == 0) {
+            clear_queue();
+        } else if (strcmp(op, "min") == 0) {
+            min_element();
         }
     }
     return 0;
