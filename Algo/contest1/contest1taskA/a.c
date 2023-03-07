@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+
 #define MAX_SIZE 10000
 
 int stack[MAX_SIZE];
