@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS= -Wall -Wextra -Wpedantic -g -Werror
-NAME =  h
+NAME =  H
 CNAME = h.c
 ONAME = h.o
 
