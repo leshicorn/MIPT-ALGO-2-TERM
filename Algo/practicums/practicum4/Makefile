@@ -1,8 +1,8 @@
-CC=gcc
+CC=g++
 CFLAGS= -Wall -Wextra -Wpedantic -g -Werror
-NAME =  c_fix
-CNAME = c_fix.c
-ONAME = c_fix.o
+NAME =  merge_sort
+CNAME = merge_sort.cpp
+ONAME = merge_sort.o
 
 objs:
 	$(CC) $(CFLAGS) -c $(CNAME)
