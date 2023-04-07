@@ -1,8 +1,8 @@
-CC=g++
-CFLAGS= -Wall -Wextra -Wpedantic -g
-NAME =  k_heap
-CNAME = k_heap.cpp
-ONAME = k_heap.o
+CC=gcc
+CFLAGS= -Wall -Wextra -Wpedantic -g -Wimplicit-function-declaration
+NAME =  A
+CNAME = A.c
+ONAME = A.o
 
 objs:
 	$(CC) $(CFLAGS) -c $(CNAME)
