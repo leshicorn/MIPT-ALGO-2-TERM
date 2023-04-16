@@ -76,45 +76,6 @@ Node * build(int n) {
     return tree;
 }
 
-Node* merge(Node* left, Node* right)
-{
-    if (left == NULL) {
-        return right;
-    }
-    if (right == NULL) {
-        return left;
-    }
-
-    if (left->priority > right->priority) {
-        left->right = merge(left->right, right);
-        left->right->parent = left;
-        return left;
-    }
-    else {
-        right->left = merge(left, right->left);
-        right->left->parent = right;
-        return right;
-    }
-}
-
-void split(Node* tree, int key, Node** left, Node** right)
-{
-    if (tree == NULL) {
-        *left = NULL;
-        *right = NULL;
-        return;
-    }
-
-    if (tree->key <= key) {
-        split(tree->right, key, &tree->right, right);
-        *left = tree;
-    }
-    else {
-        split(tree->left, key, left, &tree->left);
-        *right = tree;
-    }
-}
-
 void print_key(Node* node)
 {
     if (node == NULL) {
