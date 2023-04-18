@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS= -Wall -Wextra -Wpedantic -g -Werror
+CFLAGS= -Wall -Wextra -Wpedantic -g
 NAME =  k
 CNAME = k.c
 ONAME = k.o

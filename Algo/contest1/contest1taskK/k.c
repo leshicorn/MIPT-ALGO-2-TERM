@@ -50,12 +50,12 @@ int partition(int* arr, const int low, const int high) {
     return i;
 }
 
-void InsertionSort(int* arr, const size_t low, const size_t high) {
-    for (size_t i = low + 1; i <= high; i++) {
-        size_t key = arr[i];
-        size_t j = i - 1;
+void InsertionSort(int* arr, const int low, const int high) {
+    for (size_t i = low + 1; i <= high; ++i) {
+        int key = arr[i];
+        int j = i - 1;
 
-        while (j >= low && (size_t)arr[j] > key) {
+        while (j >= low && arr[j] > key) {
             arr[j + 1] = arr[j];
             j--;
         }
@@ -87,7 +87,7 @@ int* Input(const int n) {
         return NULL;
     }
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; ++i) {
         if (scanf("%d", &arr[i]) != 1) {
             printf("Error: invalid input\n");
             return NULL;
@@ -103,7 +103,7 @@ int* MakeSorted(int* arr, const int n) {
 }
 
 void Output(int* arr, const int n) {
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; ++i) {
         printf("%d ", arr[i]);
     }
     printf("\n");
