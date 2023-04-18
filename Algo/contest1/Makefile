@@ -1,8 +1,8 @@
 CC=gcc
-CFLAGS= -Wall -Wextra -Wpedantic -g -Werror
-NAME =  c_fix
-CNAME = c_fix.c
-ONAME = c_fix.o
+CFLAGS= -Wall -Wextra -Wpedantic -g
+NAME =  i
+CNAME = i.c
+ONAME = i.o
 
 objs:
 	$(CC) $(CFLAGS) -c $(CNAME)

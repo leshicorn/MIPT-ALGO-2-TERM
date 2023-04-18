@@ -1,13 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <limits.h>
 
+#include <stdio.h>
+
+#include <stdlib.h>
+
+
 #define SUCCESS 0
-#define MIN_SIZE_TO_USE_INSERTION_SORT 10
+#define MIN_SIZE_TO_USE_InsertionSort 10
 #define MISTAKE -1
 #define ll long long int
 
-void merge(ll* arr, ll* left, ll* right, ll left_size, ll right_size) {
+
+void Merge(ll* arr, ll* left, ll* right, ll left_size, ll right_size) {
     ll i = 0, j = 0, k = 0;
     while (i < left_size && j < right_size) {
         if (left[i] <= right[j]) {
@@ -24,7 +28,7 @@ void merge(ll* arr, ll* left, ll* right, ll left_size, ll right_size) {
     }
 }
 
-void merge_sort(ll* arr, ll size) {
+void MergeSort(ll* arr, ll size) {
     if (size < 2) {
         return;
     }
@@ -37,32 +41,32 @@ void merge_sort(ll* arr, ll size) {
     for (ll i = mid; i < size; i++) {
         right[i - mid] = arr[i];
     }
-    merge_sort(left, mid);
-    merge_sort(right, size - mid);
-    merge(arr, left, right, mid, size - mid);
+    MergeSort(left, mid);
+    MergeSort(right, size - mid);
+    Merge(arr, left, right, mid, size - mid);
 }
 
-ll cmpfunc(const void *a, const void *b) {
+ll CmpFunction(const void *a, const void *b) {
     return (*(ll*)a - *(ll*)b);
 }
 
-void swap(ll* a, ll* b) {
+void Swap(ll* a, ll* b) {
     ll temp = *a;
     *a = *b;
     *b = temp;
 }
 
-ll choose_pivot(ll low, ll high) {
+ll ChoosePivot(ll low, ll high) {
     // Choose a random pivot between low and high
     return low + rand() % (high - low + 1);
 }
 
-ll partition(ll* arr, ll low, ll high) {
-    ll pivot_idx = choose_pivot(low, high);
+ll Partition(ll* arr, ll low, ll high) {
+    ll pivot_idx = ChoosePivot(low, high);
     ll pivot = arr[pivot_idx];
 
     // Move pivot to end of array
-    swap(&arr[pivot_idx], &arr[high]);
+    Swap(&arr[pivot_idx], &arr[high]);
 
     ll i = low - 1;
     ll j = high;
@@ -80,16 +84,16 @@ ll partition(ll* arr, ll low, ll high) {
             break;
         }
 
-        swap(&arr[i], &arr[j]);
+        Swap(&arr[i], &arr[j]);
     }
 
     // Move pivot to its final position
-    swap(&arr[i], &arr[high]);
+    Swap(&arr[i], &arr[high]);
 
     return i;
 }
 
-void insertion_sort(ll* arr, ll low, ll high) {
+void InsertionSort(ll* arr, ll low, ll high) {
     for (ll i = low + 1; i <= high; i++) {
         ll key = arr[i];
         ll j = i - 1;
@@ -103,23 +107,23 @@ void insertion_sort(ll* arr, ll low, ll high) {
     }
 }
 
-void quick_sort(ll* arr, ll low, ll high) {
-    while (high - low + 1 > MIN_SIZE_TO_USE_INSERTION_SORT) {
-        ll pivot_idx = partition(arr, low, high);
+void QuickSort(ll* arr, ll low, ll high) {
+    while (high - low + 1 > MIN_SIZE_TO_USE_InsertionSort) {
+        ll pivot_idx = Partition(arr, low, high);
 
         if (pivot_idx - low < high - pivot_idx) {
-            quick_sort(arr, low, pivot_idx - 1);
+            QuickSort(arr, low, pivot_idx - 1);
             low = pivot_idx + 1;
         } else {
-            quick_sort(arr, pivot_idx + 1, high);
+            QuickSort(arr, pivot_idx + 1, high);
             high = pivot_idx - 1;
         }
     }
 
-    insertion_sort(arr, low, high);
+    InsertionSort(arr, low, high);
 }
 
-ll points(ll* arr, ll mid, ll size, ll k)
+ll Points(ll* arr, ll mid, ll size, ll k)
 {
     ll count = 0;
     ll start = arr[0];
@@ -145,34 +149,35 @@ ll points(ll* arr, ll mid, ll size, ll k)
     return (count <= k);
 }
 
-ll get_answer(ll* arr, ll left, ll right, ll mid, ll n, ll k) {
+ll GetAnswer(ll* arr, ll left, ll right, ll mid, ll n, ll k) {
     while (right - left > 1) {
         mid = (left + right) / 2;
-        if (points(arr, mid, n, k)) {
+        if (Points(arr, mid, n, k)) {
             right = mid;
         } else {
             left = mid; 
             }
     }
     ll result = 0;
-    if (points(arr, left, n, k)) {
+    if (Points(arr, left, n, k)) {
         result = left;
         return result;
-    } else if (points(arr, right, n, k)) {
+    } else if (Points(arr, right, n, k)) {
         result = right;
         return result;
-    } else if (points(arr, mid, n, k)) {
+    } else if (Points(arr, mid, n, k)) {
         result = mid;
         return result;
     }
     return MISTAKE;
 }
 
-int main() {
+int Solution() {
     ll n = 0, k = 0;
     if (scanf("%lld %lld", &n, &k) != 2) {
         printf("Error: input is not valid\n");
         return -1;
+    
     }
     ll* arr = malloc(n * sizeof(ll));
     for (ll i = 0; i < n; i++) {
@@ -183,11 +188,16 @@ int main() {
     }
 
     ll left = 0, right = INT_MAX, mid = 0;
-    // quick_sort(arr, 0, n - 1);
-    // qsort(arr, n, sizeof(ll), cmpfunc);
-    merge_sort(arr, n);
+    MergeSort(arr, n);
 
-    printf("%lld\n", get_answer(arr, left, right, mid, n, k));
+    printf("%lld\n", GetAnswer(arr, left, right, mid, n, k));
 
     return SUCCESS;
+}
+
+int main() {
+    if (Solution() == MISTAKE) {
+        printf("Error: input is not valid\n");
+        return -1;
+    }
 }

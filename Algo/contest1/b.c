@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 #include <stdbool.h>
 
 bool BinarySearch(const int* begin, const int* end, int target) {
@@ -15,7 +16,7 @@ bool BinarySearch(const int* begin, const int* end, int target) {
     return false;
 }
 
-int main() {
+int Solution() {
     int n;
     if (scanf("%d", &n) != 1) {
         printf("error");
@@ -46,6 +47,15 @@ int main() {
         bool found = BinarySearch(&arr[i], &arr[j], t);
         printf("%s\n", found ? "YES" : "NO");
     }
+    return 0;
+}
 
+int main() {
+    
+    int error_check = 0;
+    if ((error_check = Solution()) == -1) {
+        printf("error");
+        return -1;
+    }
     return 0;
 }

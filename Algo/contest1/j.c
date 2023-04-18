@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int merge(int* arr, int* extra_arr, int low, int mid, int high) {
+int Merge(int* arr, int* extra_arr, const int low, const int mid, const int high) {
     int i = low, j = mid + 1, k = low;
     int inversionCount = 0;
 
@@ -25,7 +25,7 @@ int merge(int* arr, int* extra_arr, int low, int mid, int high) {
     return inversionCount;
 }
 
-int merge_sort(int* arr, int* extra_arr, int low, int high) {
+int MergeSort(int* arr, int* extra_arr, const int low, const int high) {
     if (high <= low) {
         return 0;
     }
@@ -33,13 +33,34 @@ int merge_sort(int* arr, int* extra_arr, int low, int high) {
 
     int inversionCount = 0;
 
-    inversionCount += merge_sort(arr, extra_arr, low, mid); // left side
+    inversionCount += MergeSort(arr, extra_arr, low, mid); // left side
 
-    inversionCount += merge_sort(arr, extra_arr, mid + 1, high); // right side
+    inversionCount += MergeSort(arr, extra_arr, mid + 1, high); // right side
 
-    inversionCount += merge(arr, extra_arr, low, mid, high); // merge
+    inversionCount += Merge(arr, extra_arr, low, mid, high); // Merge
 
     return inversionCount;
+}
+
+int Input(int* arr, const int n) {
+    for (size_t i = 0; i < n; ++i) {
+        if (scanf("%d", &arr[i]) != 1) {
+            printf("Error");
+            return -1;
+        }
+    }
+    return 0;
+}
+
+void CopyArray(const int* arr, int* ExtraArr, const int n) {
+    for (size_t i = 0; i < n; ++i) {
+        ExtraArr[i] = arr[i];
+    }
+}
+
+void PrintAnswer(const int* arr, const int* ExtraArr, const int n) {
+    printf("%d\n", MergeSort(&arr[0], &ExtraArr[0], 0, n - 1));
+    free(arr);
 }
 
 int main() {
@@ -49,18 +70,17 @@ int main() {
         return -1;
     }
     int* arr = malloc((n + 1) * sizeof(int));
-    int* extra_arr = malloc((n + 1) * sizeof(int));
-    for (int i = 0; i < n; i++) {
-        if (scanf("%d", &arr[i]) != 1) {
-            printf("Error");
-            return -1;
-        }
-    }
-    for (int i = 0; i < n; i++) {
-        extra_arr[i] = arr[i];
+    int* ExtraArr = malloc((n + 1) * sizeof(int));
+
+
+    if (Input(arr, n) == -1) {
+        printf("Error\n");
+        return -1;
     }
 
-    printf("%d\n", merge_sort(&arr[0], &extra_arr[0], 0, n - 1));
-    free(arr);
+    CopyArray(arr, ExtraArr, n);
+
+    PrintAnswer(arr, ExtraArr, n);
+
     return 0;
 }
