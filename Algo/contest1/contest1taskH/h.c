@@ -1,9 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 #define MODULO (10000000LL + 4321LL)
 
-// Function to generate the sequence
+/**
+ * @brief Generates the sequence A of length n, where A[0] = A0 and A[1] = A1.
+ * 
+ * @param A 
+ * @param n 
+ * @param A0 
+ * @param A1 
+ * @return empty return
+ */
 void generate_sequence(long long int *A, int n, long long int A0, long long int A1) {
     A[0] = A0;
     A[1] = A1;
@@ -12,7 +21,14 @@ void generate_sequence(long long int *A, int n, long long int A0, long long int 
     }
 }
 
-// Function to partition the sequence
+/**
+ * @brief Partitions the array A[left..right] around the pivot A[right].
+ * 
+ * @param A 
+ * @param left 
+ * @param right 
+ * @return * Function 
+ */
 int partition(long long int *A, int left, int right) {
     long long int pivot = A[right];
     int i = left - 1;
@@ -30,7 +46,10 @@ int partition(long long int *A, int left, int right) {
     return i + 1;
 }
 
-// Function to find the k-th order statistic
+/**
+ * @brief Finds the k-th order statistic in the array A of length n.
+ * 
+ */
 long long int kth_order_statistic(long long int *A, int n, int k) {
     int left = 0;
     int right = n - 1;
@@ -44,7 +63,7 @@ long long int kth_order_statistic(long long int *A, int n, int k) {
             right = pivot_index - 1;
         }
     }
-    return -1; // This should never happen
+    return -1;
 }
 
 int main() {
