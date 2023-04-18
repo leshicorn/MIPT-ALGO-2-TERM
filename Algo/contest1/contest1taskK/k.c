@@ -1,5 +1,9 @@
 #include <stdio.h>
+
 #include <stdlib.h>
+
+#include <stdbool.h>
+
 
 #define MIN_SIZE_TO_USE_INSERTION_SORT 10
 
@@ -9,13 +13,13 @@ void swap(int* a, int* b) {
     *b = temp;
 }
 
-int choose_pivot(int low, int high) {
+int ChoosePivot(const int low, const int high) {
     // Choose a random pivot between low and high
     return low + rand() % (high - low + 1);
 }
 
-int partition(int* arr, int low, int high) {
-    int pivot_idx = choose_pivot(low, high);
+int partition(int* arr, const int low, const int high) {
+    int pivot_idx = ChoosePivot(low, high);
     int pivot = arr[pivot_idx];
 
     // Move pivot to end of array
@@ -24,7 +28,7 @@ int partition(int* arr, int low, int high) {
     int i = low - 1;
     int j = high;
 
-    while (1) {
+    while (true) {
         do {
             i++;
         } while (arr[i] < pivot);
@@ -46,7 +50,7 @@ int partition(int* arr, int low, int high) {
     return i;
 }
 
-void insertion_sort(int* arr, int low, int high) {
+void InsertionSort(int* arr, const int low, const int high) {
     for (int i = low + 1; i <= high; i++) {
         int key = arr[i];
         int j = i - 1;
@@ -60,20 +64,49 @@ void insertion_sort(int* arr, int low, int high) {
     }
 }
 
-void quick_sort(int* arr, int low, int high) {
+void QuickSort(int* arr, int low, int high) {
     while (high - low + 1 > MIN_SIZE_TO_USE_INSERTION_SORT) {
         int pivot_idx = partition(arr, low, high);
 
         if (pivot_idx - low < high - pivot_idx) {
-            quick_sort(arr, low, pivot_idx - 1);
+            QuickSort(arr, low, pivot_idx - 1);
             low = pivot_idx + 1;
         } else {
-            quick_sort(arr, pivot_idx + 1, high);
+            QuickSort(arr, pivot_idx + 1, high);
             high = pivot_idx - 1;
         }
     }
 
-    insertion_sort(arr, low, high);
+    InsertionSort(arr, low, high);
+}
+
+int* Input(const int n) {
+    int* arr = malloc(n * sizeof(int));
+    if (arr == NULL) {
+        printf("Error: memory allocation failed\n");
+        return NULL;
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (scanf("%d", &arr[i]) != 1) {
+            printf("Error: invalid input\n");
+            return NULL;
+        }
+    }
+
+    return arr;
+}
+
+int* MakeSorted(int* arr, const int n) {
+    QuickSort(arr, 0, n - 1);
+    return arr;
+}
+
+void Output(int* arr, const int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
 }
 
 int main() {
@@ -82,26 +115,12 @@ int main() {
         printf("Error: invalid input");
         return 1;
     }
+    
+    int* arr = Input(n);
 
-    int* arr = malloc(n * sizeof(int));
-    if (arr == NULL) {
-        printf("Error: memory allocation failed");
-        return 1;
-    }
+    arr = MakeSorted(arr, n);
 
-    for (int i = 0; i < n; i++) {
-        if (scanf("%d", &arr[i]) != 1) {
-            printf("Error: invalid input");
-            free(arr);
-            return 1;
-        }
-    }
+    Output(arr, n);
 
-    quick_sort(arr, 0, n - 1);
-
-    for (int i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
     return 0;
 }
