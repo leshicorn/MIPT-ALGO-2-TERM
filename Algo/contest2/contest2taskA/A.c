@@ -232,6 +232,12 @@ int find(node * root, const int key) {
     }
 }
 
+
+/**
+ * @brief Main function
+ * 
+ * @param n 
+ */
 void Solution(int n) {
     int x = 0, result = 0;
     char op, prev_op;
@@ -265,7 +271,7 @@ int main() {
             printf("n is not a number\n");
             return -1;
         }
-        
+
         Solution(n);
 
         return 0;
