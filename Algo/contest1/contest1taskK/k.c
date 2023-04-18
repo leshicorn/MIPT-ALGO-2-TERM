@@ -7,17 +7,37 @@
 
 #define MIN_SIZE_TO_USE_INSERTION_SORT 10
 
+/**
+ * @brief Swap two integers
+ * 
+ * @param a 
+ * @param b 
+ */
 void swap(int* a, int* b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
 
+/**
+ * @brief Choose pivot in range [low, high]
+ * 
+ * @param low 
+ * @param high 
+ * @return int 
+ */
 int ChoosePivot(const int low, const int high) {
-    // Choose a random pivot between low and high
     return low + rand() % (high - low + 1);
 }
 
+/**
+ * @brief Partition array in range [low, high] around pivot
+ * 
+ * @param arr 
+ * @param low 
+ * @param high 
+ * @return int 
+ */
 int partition(int* arr, const int low, const int high) {
     int pivot_idx = ChoosePivot(low, high);
     int pivot = arr[pivot_idx];
@@ -50,6 +70,13 @@ int partition(int* arr, const int low, const int high) {
     return i;
 }
 
+/**
+ * @brief Insertion sort in range [low, high]
+ * 
+ * @param arr 
+ * @param low 
+ * @param high 
+ */
 void InsertionSort(int* arr, const int low, const int high) {
     for (size_t i = low + 1; i <= high; ++i) {
         int key = arr[i];
@@ -64,6 +91,13 @@ void InsertionSort(int* arr, const int low, const int high) {
     }
 }
 
+/**
+ * @brief Quick sort in range [low, high]
+ * 
+ * @param arr 
+ * @param low 
+ * @param high 
+ */
 void QuickSort(int* arr, int low, int high) {
     while (high - low + 1 > MIN_SIZE_TO_USE_INSERTION_SORT) {
         int pivot_idx = partition(arr, low, high);
@@ -80,6 +114,12 @@ void QuickSort(int* arr, int low, int high) {
     InsertionSort(arr, low, high);
 }
 
+/**
+ * @brief Input array of size n
+ * 
+ * @param n 
+ * @return int* 
+ */
 int* Input(const int n) {
     int* arr = malloc(n * sizeof(int));
     if (arr == NULL) {
@@ -97,11 +137,24 @@ int* Input(const int n) {
     return arr;
 }
 
+/**
+ * @brief Make sorted array
+ * 
+ * @param arr 
+ * @param n 
+ * @return int* 
+ */
 int* MakeSorted(int* arr, const int n) {
     QuickSort(arr, 0, n - 1);
     return arr;
 }
 
+/**
+ * @brief Output array of size n
+ * 
+ * @param arr 
+ * @param n 
+ */
 void Output(int* arr, const int n) {
     for (int i = 0; i < n; ++i) {
         printf("%d ", arr[i]);
