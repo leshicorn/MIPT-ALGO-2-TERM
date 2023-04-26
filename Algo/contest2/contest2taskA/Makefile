@@ -1,8 +1,8 @@
-CC=g++
-CFLAGS= -Wall -Wextra -Wpedantic -g -Werror
-NAME =  merge_sort
-CNAME = merge_sort.cpp
-ONAME = merge_sort.o
+CC=gcc
+CFLAGS= -Wall -Wextra -Wpedantic -g -Wimplicit-function-declaration
+NAME =  A
+CNAME = A.c
+ONAME = A.o
 
 objs:
 	$(CC) $(CFLAGS) -c $(CNAME)
