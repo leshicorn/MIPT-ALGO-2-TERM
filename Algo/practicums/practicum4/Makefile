@@ -1,8 +1,8 @@
 CC=g++
 CFLAGS= -Wall -Wextra -Wpedantic -g
-NAME =  k_heap_1
-CNAME = k_heap.cpp
-ONAME = k_heap.o
+NAME =  binomial_heap
+CNAME = binomial_heap.cpp
+ONAME = binomial_heap.o
 
 objs:
 	$(CC) $(CFLAGS) -c $(CNAME)
