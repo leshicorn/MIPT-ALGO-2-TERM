@@ -1,0 +1,1 @@
+Time taken by Segment Tree: 0.518464 seconds

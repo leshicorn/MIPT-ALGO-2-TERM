@@ -1,0 +1,7 @@
+Elapsed time: 0.093496 seconds
+Elapsed time: 0.089235 seconds
+Elapsed time: 0.101668 seconds
+Elapsed time: 0.10896 seconds
+Elapsed time: 0.104877 seconds
+
+average time: 0.099647 seconds
