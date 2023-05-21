@@ -1,0 +1,41 @@
+Test 1:
+insertions: 100000 0.04 s
+deletions: 50000 0.019 s
+
+Test 2:
+insertions: 200000 0.095 s
+deletions: 100000 0.057 s
+
+Test 3:
+insertions: 300000 0.183 s
+deletions: 150000 0.114 s
+
+Test 4:
+insertions: 400000 0.313 s
+deletions: 200000 0.194 s
+
+Test 5:
+insertions: 500000 0.431 s
+deletions: 250000 0.272 s
+
+Test 6:
+insertions: 600000 0.55 s
+deletions: 300000 0.297 s
+
+Test 7:
+insertions: 700000 0.574 s
+deletions: 350000 0.374 s
+
+Test 8:
+insertions: 800000 0.708 s
+deletions: 400000 0.455 s
+
+Test 9:
+insertions: 900000 0.846 s
+deletions: 450000 0.532 s
+
+Test 10:
+insertions: 1000000 0.973 s
+deletions: 500000 0.611 s
+
+Sorted sequence of size 1000000: 0.375 s
