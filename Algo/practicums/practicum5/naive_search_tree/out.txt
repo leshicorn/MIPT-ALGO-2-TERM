@@ -1,0 +1,18 @@
+Test 1 - Insertion Time: 0.004735 seconds
+Test 1 - Deletion Time: 0.002207 seconds
+Test 1 - Sorted Insertion Time: 43.8483 seconds
+Test 2 - Insertion Time: 0.001673 seconds
+Test 2 - Deletion Time: 0.000759 seconds
+Test 2 - Sorted Insertion Time: 44.3022 seconds
+Test 3 - Insertion Time: 0.002223 seconds
+Test 3 - Deletion Time: 0.000795 seconds
+Test 3 - Sorted Insertion Time: 43.8383 seconds
+Test 4 - Insertion Time: 0.001558 seconds
+Test 4 - Deletion Time: 0.000656 seconds
+Test 4 - Sorted Insertion Time: 43.4335 seconds
+Test 5 - Insertion Time: 0.001586 seconds
+Test 5 - Deletion Time: 0.000677 seconds
+Test 5 - Sorted Insertion Time: 43.0821 seconds
+Average Insertion Time: 0.002355 seconds
+Average Deletion Time: 0.0010188 seconds
+Average Sorted Insertion Time: 43.7009 seconds
